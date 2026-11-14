@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Plataforma de Inglés Quirúrgico: Pared Abdominal & Técnica TAR (A1 • B1 • C1)</title>
+  <meta name="description" content="Plataforma interactiva de Inglés Médico y Quirúrgico (Niveles A1, B1, C1): Pared Abdominal, Técnica TAR, Quirófano en EE. UU. y Observership con el Dr. Yuri Novitsky. Audio en inglés americano natural." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <div class="brand-area">
+          <div class="brand-icon" aria-hidden="true">🩺</div>
+          <div class="brand-text">
+            <h1>Inglés Quirúrgico: Pared Abdominal y Técnica TAR</h1>
+            <p>Plataforma Integral de Preparación (EFL Medical Course) — Observership Dr. Yuri Novitsky</p>
+          </div>
+        </div>
+        <div class="cefr-pills">
+          <span class="cefr-pill">A1 Base &amp; OR</span>
+          <span class="cefr-pill">B1 Anatomía &amp; Instrumental</span>
+          <span class="cefr-pill">C1 Técnica TAR &amp; Debate</span>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Secciones de la plataforma">
+        <button data-tab="inicio" onclick="switchTab('inicio', this)">🏠 Inicio (A1–C1)</button>
+        <button class="active" data-tab="flashcards" onclick="switchTab('flashcards', this)">🗂️ Flashcards (25 / 40)</button>
+        <button data-tab="glosario" onclick="switchTab('glosario', this)">📖 Glosario &amp; TAR</button>
+        <button data-tab="protocolo" onclick="switchTab('protocolo', this)">🏥 Etiqueta &amp; Pitch</button>
+        <button data-tab="clases" onclick="switchTab('clases', this)">🎓 5 Clases &amp; Videos</button>
+        <button data-tab="ejercicios" onclick="switchTab('ejercicios', this)">✍️ Ejercicios Interactivos</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- BARRA UNIVERSAL DE AUDIO AMERICANO (CELULAR, TABLET Y PC) -->
+    <div class="audio-banner" role="region" aria-label="Control de Audio en Inglés Americano">
+      <div class="audio-status-wrap">
+        <span class="audio-dot" id="audioDot"></span>
+        <div class="audio-status" id="audioStatus">
+          <strong>Audio de Pronunciación (US English Natural):</strong> Optimizado para celular, tablet y PC. Toca <em>"Probar Audio"</em>.
+        </div>
+      </div>
+      <div class="audio-toolbar-controls">
+        <select id="voiceSelect" class="voice-select" aria-label="Seleccionar voz en inglés americano" onchange="setPreferredVoice(this.value)">
+          <option value="">🇺🇸 Cargando voz US...</option>
+        </select>
+        <select id="rateSelect" class="speed-select" aria-label="Velocidad de voz" onchange="setPreferredRate(this.value)">
+          <option value="0.96" selected>⚡ Fluido Natural (1.0x)</option>
+          <option value="0.86">🎯 Claro Estudio (0.85x)</option>
+          <option value="0.78">🐢 Fonético Lento (0.78x)</option>
+        </select>
+        <button class="btn-unlock" id="unlockBtn" onclick="testAndUnlockAudio()">🔊 Probar Audio</button>
+        <button class="btn-stop-audio" onclick="stopAllAudio()" title="Detener audio">⏹ Stop</button>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         TAB 0: INICIO & RUTA DE APRENDIZAJE (A1 - B1 - C1)
+         ========================================================= -->
+    <section id="tab-inicio" class="tab-panel">
+      <div class="dashboard-hero">
+        <span class="sec-badge a1">A1</span>
+        <span class="sec-badge b1">B1</span>
+        <span class="sec-badge c1">C1</span>
+        <h2>Bienvenido/a al Programa de Inglés Quirúrgico: Pared Abdominal &amp; TAR</h2>
+        <p>
+          Plataforma interactiva estructurada por niveles CEFR (<strong>A1 → B1 → C1</strong>) diseñada especialmente para cirujanos de pared abdominal en preparación para su rotación clínica (<em>Observership</em>) en Estados Unidos con el <strong>Dr. Yuri Novitsky</strong>.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Flashcards Dominadas</div>
+            <div class="stat-value" id="statFlashcards">0 / 40</div>
+            <div class="stat-sub">25 esenciales + 15 avanzadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Clases Completadas</div>
+            <div class="stat-value" id="statClasses">0 / 5</div>
+            <div class="stat-sub">Programa de 5 módulos (A1–C1)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Autoevaluación</div>
+            <div class="stat-value" id="statScore">Pendiente</div>
+            <div class="stat-sub">Worksheet &amp; Quiz Clínico</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-grid">
+        <div class="module-card" onclick="switchTab('flashcards')">
+          <div>
+            <span class="sec-badge a1">A1.1</span><span class="sec-badge b1">B1.1</span><span class="sec-badge c1">C1.1</span>
+            <h3>🗂️ Flashcards con Pronunciación US</h3>
+            <p>Entrena las 25 tarjetas esenciales del manual más 15 tarjetas de instrumental, optimización preoperatoria y manejo postoperatorio con audio fluido.</p>
+          </div>
+          <span class="module-link">Ir a Flashcards →</span>
+        </div>
+
+        <div class="module-card" onclick="switchTab('glosario')">
+          <div>
+            <span class="sec-badge a1">A1.2</span><span class="sec-badge b1">B1.2</span><span class="sec-badge c1">C1.2</span>
+            <h3>📖 Glosario Clínico y 10 Pasos TAR</h3>
+            <p>Corrección diagnóstica (A1), anatomía de la pared abdominal y patología herniaria (B1), e secuencia quirúrgica paso a paso del TAR (C1).</p>
+          </div>
+          <span class="module-link">Explorar Glosario →</span>
+        </div>
+
+        <div class="module-card" onclick="switchTab('protocolo')">
+          <div>
+            <span class="sec-badge b1">B1.3</span><span class="sec-badge c1">C1.3</span>
+            <h3>🏥 Etiqueta OR, Pitch 60s &amp; Narración</h3>
+            <p>Protocolo en el quirófano estadounidense, personalizador interactivo de <em>Elevator Pitch</em> con cronómetro de 60s y guion de narración en vivo.</p>
+          </div>
+          <span class="module-link">Practicar Pitch y OR →</span>
+        </div>
+
+        <div class="module-card" onclick="switchTab('clases')">
+          <div>
+            <span class="sec-badge a1">A1</span><span class="sec-badge b1">B1</span><span class="sec-badge c1">C1</span>
+            <h3>🎓 5 Clases Estructuradas &amp; Videos</h3>
+            <p>4 videos quirúrgicos de YouTube verificados y reproductor integrado + 5 clases con diálogos clínicos en 2 voces americanas.</p>
+          </div>
+          <span class="module-link">Abrir Clases y Videos →</span>
+        </div>
+
+        <div class="module-card" onclick="switchTab('ejercicios')">
+          <div>
+            <span class="sec-badge a1">A1.3</span><span class="sec-badge b1">B1.4</span><span class="sec-badge c1">C1.4</span>
+            <h3>✍️ Ejercicios Interactivos &amp; Caso Clínico</h3>
+            <p>Corrección de errores (A1), asociación de conceptos de quirófano (B1), quiz de decisiones intraoperatorias TAR (C1) y redacción con lector de voz.</p>
+          </div>
+          <span class="module-link">Resolver Ejercicios →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 1: FLASHCARDS INTERACTIVAS (A1 - B1 - C1)
+         ========================================================= -->
+    <section id="tab-flashcards" class="tab-panel active">
+      <div class="fc-layout">
+        <div class="fc-wrap">
+          <div class="progress-wrap">
+            <div class="progress-top">
+              <span id="cardCounter">Tarjeta 1 de 25</span>
+              <span id="learnedCounter">Aprendidas: 0 / 40</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="filters-row">
+            <button class="filter-btn active" data-filter="core" onclick="setFilter('core')">⭐ Esenciales (25)</button>
+            <button class="filter-btn" data-filter="all" onclick="setFilter('all')">📚 Todas (40)</button>
+            <button class="filter-btn" data-filter="A1" onclick="setFilter('A1')">Nivel A1</button>
+            <button class="filter-btn" data-filter="B1" onclick="setFilter('B1')">Nivel B1</button>
+            <button class="filter-btn" data-filter="C1" onclick="setFilter('C1')">Nivel C1</button>
+            <button class="filter-btn" data-filter="review" onclick="setFilter('review')">⏳ Por repasar</button>
+            <button class="filter-btn" data-filter="learned" onclick="setFilter('learned')">✓ Aprendidas</button>
+          </div>
+
+          <div class="search-bar-wrap">
+            <input
+              type="search"
+              class="search-input"
+              placeholder="🔍 Buscar término en inglés, español o categoría (ej. sheath, Bovie, hernia)..."
+              oninput="onFlashcardSearch(this.value)"
+            />
+            <button class="btn-secondary" onclick="shuffleCards()" title="Tarjeta aleatoria">🔀 Aleatoria</button>
+          </div>
+
+          <div class="scene" onclick="flipCard()">
+            <div class="card" id="flashcard">
+              <div class="card-face card-front">
+                <div class="card-header">
+                  <span>Término Quirúrgico (US English)</span>
+                  <span id="frontBadge"></span>
+                </div>
+                <div class="card-body">
+                  <div class="card-cat-tag" id="frontCatTag"></div>
+                  <div class="term-en" id="frontTerm">Abdominal wall</div>
+                  <div class="phonetic" id="frontPhonetic">/ab-DÓ-mi-nal uól/</div>
+                  <div class="audio-controls" onclick="event.stopPropagation()">
+                    <button class="btn-audio" id="speakBtnFront" onclick="speakCurrent(0.96, 'speakBtnFront')">
+                      <span class="wave"><span></span><span></span><span></span></span>
+                      🔊 Escuchar Natural (1.0x)
+                    </button>
+                    <button class="btn-audio slow" id="slowBtnFront" onclick="speakCurrent(0.80, 'slowBtnFront')">
+                      🐢 Articulado (0.8x)
+                    </button>
+                  </div>
+                </div>
+                <div class="tap-tip">Toca la tarjeta o presiona [Espacio] para girar • Desliza o usa ← → para cambiar</div>
+              </div>
+
+              <div class="card-face card-back">
+                <div class="card-header">
+                  <span>Significado Clínico y Uso en EE. UU.</span>
+                  <span id="backTermSmall"></span>
+                </div>
+                <div class="card-body">
+                  <div class="definition-es" id="backDef"></div>
+                  <div class="hint-box" id="backHint"></div>
+                  <div class="audio-controls" onclick="event.stopPropagation()">
+                    <button class="btn-audio" id="speakBtnBack" onclick="speakCurrent(0.96, 'speakBtnBack')">
+                      <span class="wave"><span></span><span></span><span></span></span>
+                      🔊 Repetir Pronunciación US
+                    </button>
+                  </div>
+                </div>
+                <div class="tap-tip">Toca para volver al frente</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nav-row">
+            <button class="btn-nav" onclick="prevCard()">← Anterior</button>
+            <button class="btn-master" id="masterBtn" onclick="toggleLearned()">✓ Marcar aprendida</button>
+            <button class="btn-nav" onclick="nextCard()">Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 2: GLOSARIO, ANATOMÍA & 10 PASOS DE LA TÉCNICA TAR
+         ========================================================= -->
+    <section id="tab-glosario" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge a1">A1.1</span> 1. Diagnóstico Inicial y Corrección de Mensajes</h2>
+          <button class="mini-play" onclick="speakText('I am going to do an observership with Yuri Novitsky. He is a surgeon and an expert on the abdominal wall. He described an important technique: the transversus abdominis release. I would like to learn operating room vocabulary.', 0.95, this)">
+            🔊 Escuchar Mensaje Corregido (1.0x)
+          </button>
+        </div>
+
+        <div class="quote-box orig">
+          <strong>Mensaje Original (Con errores frecuentes A1):</strong> "Mmm I ‘m not sure.. I ‘m going to observership with Yuri Novitsky, He is a surgeron, he is an expert in the abdominal well.. he described am important tecnique , the division of transversus muscle.. I like to learn operation room vocabulary .."
+        </div>
+        <div class="quote-box">
+          <strong>Versión Corregida Natural (American English):</strong> "Mmm, I'm not sure... I'm going to do an observership with Yuri Novitsky. He's a surgeon and an expert on the abdominal wall. He described an important technique: the transversus abdominis release (TAR). I'd like to learn operating room vocabulary."
+          <button class="mini-play" onclick="speakText('I am going to do an observership with Yuri Novitsky. He is a surgeon and an expert on the abdominal wall. He described an important technique: the transversus abdominis release. I would like to learn operating room vocabulary.', 0.95, this)">🔊 Normal</button>
+          <button class="mini-play slow-btn" onclick="speakText('I am going to do an observership with Yuri Novitsky. He is a surgeon and an expert on the abdominal wall. He described an important technique: the transversus abdominis release. I would like to learn operating room vocabulary.', 0.82, this)">🐢 Lento</button>
+        </div>
+        <ul>
+          <li><strong>Observership (Sustantivo contable):</strong> Nunca se usa como verbo directo (<em>to observership</em>). Se dice <em>to do an observership</em> o <em>to go on an observership</em>.</li>
+          <li><strong>Ortografía y Fonética Clave:</strong> <em>Surgeon</em> (/SÉR-dshon/, sin "r" antes de la "o"), <em>abdominal wall</em> (/uól/ = pared; <em>well</em> significa pozo/bien), <em>an important technique</em> (artículo <em>an</em> antes de sonido vocálico).</li>
+          <li><strong>Operating room (the OR):</strong> En inglés médico se usa el participio <em>operating room</em> (abreviado siempre como <em>the OR</em>) y <em>I'd like to learn</em> (<em>I would like</em>) para expresar un objetivo o deseo actual.</li>
+        </ul>
+      </div>
+
+      <!-- Buscador rápido en las tablas del glosario -->
+      <div class="section-card" style="padding:14px 18px;">
+        <input
+          type="search"
+          class="search-input"
+          style="width:100%;"
+          placeholder="🔎 Filtrar términos en las tablas del glosario (ej. rectus, fascia, hernia, Bovie, seroma)..."
+          oninput="filterGlossaryTables(this.value)"
+        />
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge b1">B1.1</span> 2. Anatomía Quirúrgica de la Pared Abdominal</h2>
+          <button class="mini-play" onclick="speakText('Abdominal wall. Anterior and posterior rectus sheath. Rectus abdominis muscle. External and internal oblique. Transversus abdominis. Linea alba. Linea semilunaris. Arcuate line. Transversalis fascia. Preperitoneal fat. Peritoneum. Neurovascular bundles. Deep inferior epigastric vessels.', 0.92, this)">
+            🔊 Reproducir Toda la Tabla
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr><th>Nivel</th><th>Término en Inglés + Audio US</th><th>Pronunciación</th><th>Significado Clínico en Español</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="sec-badge a1">A1</span></td><td><strong>Abdominal wall</strong> <button class="mini-play" onclick="speakText('Abdominal wall', 0.95, this)">🔊</button></td><td>/ab-DÓ-mi-nal uól/</td><td>Pared abdominal</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Anterior / Posterior rectus sheath</strong> <button class="mini-play" onclick="speakText('Anterior and posterior rectus sheath', 0.95, this)">🔊</button></td><td>/an-TÍ-rior / pos-TÍ-rior RÉK-tus shíz/</td><td>Vaina anterior / posterior de los rectos</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Rectus abdominis muscle</strong> <button class="mini-play" onclick="speakText('Rectus abdominis muscle', 0.95, this)">🔊</button></td><td>/RÉK-tus ab-DÓ-mi-nis MÁ-sol/</td><td>Músculo recto del abdomen</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>External / Internal oblique</strong> <button class="mini-play" onclick="speakText('External and internal oblique', 0.95, this)">🔊</button></td><td>/eks-TÉR-nal / in-TÉR-nal o-BLÍK/</td><td>Músculo oblicuo mayor (externo) / menor (interno)</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Transversus abdominis</strong> <button class="mini-play" onclick="speakText('Transversus abdominis', 0.95, this)">🔊</button></td><td>/trans-VÉR-sus ab-DÓ-mi-nis/</td><td>Músculo transverso del abdomen</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Linea alba</strong> <button class="mini-play" onclick="speakText('Linea alba', 0.95, this)">🔊</button></td><td>/LÍ-ni-a ÁL-ba/</td><td>Línea alba (rafe tendinoso medio)</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Linea semilunaris</strong> <button class="mini-play" onclick="speakText('Linea semilunaris', 0.95, this)">🔊</button></td><td>/LÍ-ni-a se-mi-lu-NÁ-ris/</td><td>Línea semilunar (de Spiegel)</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Arcuate line</strong> <button class="mini-play" onclick="speakText('Arcuate line', 0.95, this)">🔊</button></td><td>/ÁR-kiu-eit láin/</td><td>Línea arqueada (arco de Douglas)</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Transversalis fascia</strong> <button class="mini-play" onclick="speakText('Transversalis fascia', 0.95, this)">🔊</button></td><td>/trans-ver-SÁ-lis FÁ-sha/</td><td>Fascia transversalis</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Preperitoneal fat</strong> <button class="mini-play" onclick="speakText('Preperitoneal fat', 0.95, this)">🔊</button></td><td>/pri-pe-ri-to-NÍ-al fát/</td><td>Grasa preperitoneal</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Peritoneum</strong> <button class="mini-play" onclick="speakText('Peritoneum', 0.95, this)">🔊</button></td><td>/pe-ri-to-NÍ-um/</td><td>Peritoneo</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Neurovascular bundles</strong> <button class="mini-play" onclick="speakText('Neurovascular bundles', 0.95, this)">🔊</button></td><td>/niu-ro-VÁS-kiu-lar BÁN-dols/</td><td>Paquetes vasculonerviosos intercostales</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Deep inferior epigastric vessels</strong> <button class="mini-play" onclick="speakText('Deep inferior epigastric vessels', 0.95, this)">🔊</button></td><td>/díp in-FÍ-rior e-pi-GÁS-trik VÉ-sols/</td><td>Vasos epigástricos inferiores profundos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge b1">B1.2</span> 3. Patología Herniaria y Evaluación Preoperatoria</h2>
+          <button class="mini-play" onclick="speakText('Ventral and incisional hernia. Parastomal hernia. Swiss-cheese defects. Defect width. Loss of domain. Reducible, incarcerated, and strangulated hernia. Adhesions and adhesiolysis. Recurrence rate.', 0.92, this)">
+            🔊 Reproducir Toda la Tabla
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr><th>Nivel</th><th>Término en Inglés + Audio US</th><th>Pronunciación</th><th>Significado Clínico en Español</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Ventral / Incisional hernia</strong> <button class="mini-play" onclick="speakText('Ventral and incisional hernia', 0.95, this)">🔊</button></td><td>/VÉN-tral / in-SÍ-sho-nal JÉR-nia/</td><td>Hernia ventral / Eventración</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Parastomal hernia</strong> <button class="mini-play" onclick="speakText('Parastomal hernia', 0.95, this)">🔊</button></td><td>/pa-ra-STÓU-mal JÉR-nia/</td><td>Hernia paraestomal</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Swiss-cheese defects</strong> <button class="mini-play" onclick="speakText('Swiss-cheese defects', 0.95, this)">🔊</button></td><td>/suís-chíz DÍ-fekts/</td><td>Defectos múltiples en "queso suizo"</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Defect width</strong> <button class="mini-play" onclick="speakText('Defect width', 0.95, this)">🔊</button></td><td>/DÍ-fekt uíz/</td><td>Ancho transverso del defecto herniario</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Loss of domain</strong> <button class="mini-play" onclick="speakText('Loss of domain', 0.95, this)">🔊</button></td><td>/lós of do-MÉIN/</td><td>Pérdida de domicilio</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Reducible / Incarcerated / Strangulated</strong> <button class="mini-play" onclick="speakText('Reducible, incarcerated, strangulated', 0.95, this)">🔊</button></td><td>/ri-DIÚ-si-bol / in-KÁR-se-rei-ted / STRÁN-giu-lei-ted/</td><td>Reductible / Atascada / Estrangulada</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>Adhesions / Adhesiolysis</strong> <button class="mini-play" onclick="speakText('Adhesions and adhesiolysis', 0.95, this)">🔊</button></td><td>/ad-JÍ-shons / ad-ji-si-Ó-li-sis/</td><td>Adherencias / Adherenciólisis (liberación)</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Recurrence rate</strong> <button class="mini-play" onclick="speakText('Recurrence rate', 0.95, this)">🔊</button></td><td>/ri-KÁ-rens réit/</td><td>Tasa de recidiva</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge b1">B1.3</span> 4. Instrumental Quirúrgico de EE. UU. y Comandos de Quirófano</h2>
+          <button class="mini-play" onclick="speakText('Bovie electrocautery. DeBakey forceps. Kelly clamp. Army-Navy retractor. Bookwalter retractor. Needle driver. Yankauer suction. Jackson-Pratt drain.', 0.92, this)">
+            🔊 Reproducir Instrumental
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr><th>Nivel</th><th>Instrumento / Comando en EE. UU.</th><th>Pronunciación</th><th>Equivalente en Quirófano Argentino</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Bovie (electrocautery pencil)</strong> <button class="mini-play" onclick="speakText('Bovie electrocautery pencil', 0.95, this)">🔊</button></td><td>/BÓU-vi/</td><td>Electrobisturí</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>DeBakey / Adson forceps (pick-ups)</strong> <button class="mini-play" onclick="speakText('DeBakey and Adson forceps', 0.95, this)">🔊</button></td><td>/di-BÉI-ki / ÁD-son FÓR-seps/</td><td>Pinza de disección atraumática DeBakey / Adson</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Kelly / Right-angle clamp</strong> <button class="mini-play" onclick="speakText('Kelly clamp and right-angle clamp', 0.95, this)">🔊</button></td><td>/KÉ-li / ráit-ÁN-gol klámp/</td><td>Pinza hemostática de Kelly / Doble utilidad (Mixter)</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Army-Navy / Bookwalter retractor</strong> <button class="mini-play" onclick="speakText('Army-Navy and Bookwalter retractor', 0.95, this)">🔊</button></td><td>/ÁR-mi NÉI-vi / BÚK-uól-ter/</td><td>Separador de Farabeuf / Separador autoestático de aro</td></tr>
+              <tr><td><span class="sec-badge b1">B1</span></td><td><strong>Needle driver &amp; Yankauer suction</strong> <button class="mini-play" onclick="speakText('Needle driver and Yankauer suction', 0.95, this)">🔊</button></td><td>/NÍ-dol DRÁI-ver / IÁN-kau-er/</td><td>Portaagujas y cánula de aspiración rígida</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>"Give me counter-traction laterally"</strong> <button class="mini-play" onclick="speakText('Give me counter-traction laterally', 0.95, this)">🔊</button></td><td>/gív mi KÁUN-ter TRÁK-shon/</td><td>"Haceme contratracción hacia lateral"</td></tr>
+              <tr><td><span class="sec-badge c1">C1</span></td><td><strong>"Buzz that bleeder" / "Cut the tails short"</strong> <button class="mini-play" onclick="speakText('Buzz that bleeder. Cut the tails short.', 0.95, this)">🔊</button></td><td>/báz dat BLÍ-der/</td><td>"Tocá ese vaso con el electro" / "Cortá los cabos cortos"</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge c1">C1.1</span> 5. Los 10 Pasos Quirúrgicos de la Técnica TAR (Dr. Yuri Novitsky)</h2>
+          <button class="btn-audio" style="padding:7px 12px; font-size:0.8rem;" onclick="playAllTarSteps(this)">
+            ▶ Escuchar los 10 Pasos Completos
+          </button>
+        </div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-top:0;">
+          Secuencia quirúrgica estándar del <em>Transversus Abdominis Release (Posterior Component Separation)</em> con audio individual y consejos anatómicos:
+        </p>
+        <ol class="tar-step-list" id="tarStepsContainer"></ol>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 3: PROTOCOLO OR, ELEVATOR PITCH & LIVE NARRATION
+         ========================================================= -->
+    <section id="tab-protocolo" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge b1">B1.1</span> Reglas de Oro en un Quirófano de EE. UU. (OR Etiquette)</h2>
+        </div>
+        <ul>
+          <li><strong>Manos siempre visibles y recogidas:</strong> Si no estás vestido de estéril (<em>scrubbed in</em>), mantén las manos cruzadas a la altura del pecho, nunca en los bolsillos ni cerca de los campos azules/verdes (<em>sterile drapes</em>).</li>
+          <li><strong>Presentación inmediata:</strong> Preséntate primero ante la <em>Circulating Nurse</em> al entrar al OR para firmar el registro y preguntar dónde ubicarte.</li>
+          <li><strong>Silencio en momentos críticos:</strong> Evita preguntas durante la inducción anestésica, adhesiólisis compleja junto al intestino o sangrado activo.</li>
+        </ul>
+
+        <h3><span class="sec-badge b1">B1.2</span> Frases Clave de Interacción en el Quirófano</h3>
+        <div class="quote-box">
+          <strong>Al entrar al OR (a la Circulating Nurse):</strong><br/>
+          "Hi, I'm Dr. Dani Castillo, an international surgical observer from Argentina joining Dr. Novitsky today. Where should I sign in, and where is the best spot for me to stand?"
+          <button class="mini-play" onclick="speakText('Hi, I am Doctor Dani Castillo, an international surgical observer from Argentina joining Doctor Novitsky today. Where should I sign in, and where is the best spot for me to stand?', 0.95, this)">🔊 Normal</button>
+          <button class="mini-play slow-btn" onclick="speakText('Hi, I am Doctor Dani Castillo, an international surgical observer from Argentina joining Doctor Novitsky today. Where should I sign in, and where is the best spot for me to stand?', 0.80, this)">🐢 Lento</button>
+        </div>
+
+        <div class="quote-box">
+          <strong>Para pedir permiso y acercarse a ver los reparos anatómicos:</strong><br/>
+          "Excuse me, may I step in a bit closer to get a better view of the anatomical landmarks?"
+          <button class="mini-play" onclick="speakText('Excuse me, may I step in a bit closer to get a better view of the anatomical landmarks?', 0.95, this)">🔊 Normal</button>
+          <button class="mini-play slow-btn" onclick="speakText('Excuse me, may I step in a bit closer to get a better view of the anatomical landmarks?', 0.80, this)">🐢 Lento</button>
+        </div>
+
+        <div class="quote-box">
+          <strong>Preguntas técnicas de alto nivel (C1) para el Dr. Novitsky:</strong><br/>
+          • "Dr. Novitsky, how far laterally do you usually extend your dissection in a standard TAR?"
+          <button class="mini-play" onclick="speakText('Doctor Novitsky, how far laterally do you usually extend your dissection in a standard TAR?', 0.95, this)">🔊</button><br/>
+          • "What is your preferred suture material and size for closing the posterior layer?"
+          <button class="mini-play" onclick="speakText('What is your preferred suture material and size for closing the posterior layer?', 0.95, this)">🔊</button><br/>
+          • "In patients with severe loss of domain, how many weeks prior to surgery do you administer preoperative Botox?"
+          <button class="mini-play" onclick="speakText('In patients with severe loss of domain, how many weeks prior to surgery do you administer preoperative Botox?', 0.95, this)">🔊</button>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge b1">B1.3</span> Constructor Interactivo: Elevator Pitch de 60 Segundos</h2>
+        </div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-top:0;">
+          Personaliza tus datos reales para escuchar tu presentación exacta pronunciada con acento estadounidense fluido y entrena con el cronómetro de 60 segundos:
+        </p>
+
+        <div class="pitch-builder-grid">
+          <div class="pitch-field">
+            <label for="pitchCity">Tu Ciudad en Argentina</label>
+            <input type="text" id="pitchCity" value="Buenos Aires" oninput="updateElevatorPitch()" />
+          </div>
+          <div class="pitch-field">
+            <label for="pitchHospital">Tu Hospital / Institución</label>
+            <input type="text" id="pitchHospital" value="a tertiary university hospital" oninput="updateElevatorPitch()" />
+          </div>
+          <div class="pitch-field">
+            <label for="pitchFocus">Foco Quirúrgico Específico</label>
+            <input type="text" id="pitchFocus" value="massive ventral defects and parastomal hernias" oninput="updateElevatorPitch()" />
+          </div>
+        </div>
+
+        <div class="quote-box" id="pitchPreviewText"></div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+          <button class="btn-audio" onclick="speakCustomPitch(0.95, this)">
+            <span class="wave"><span></span><span></span><span></span></span>
+            🔊 Escuchar Mi Pitch Personalizado (1.0x)
+          </button>
+          <button class="btn-audio slow" onclick="speakCustomPitch(0.82, this)">
+            🐢 Escuchar Lento para Shadowing (0.8x)
+          </button>
+        </div>
+
+        <div class="timer-box">
+          <div>
+            <div style="font-size:0.78rem; text-transform:uppercase; color:#94a3b8; font-weight:700;">Cronómetro de Entrenamiento Oral</div>
+            <div style="font-size:0.86rem;">Objetivo: Presentarte con naturalidad en menos de 60 segundos</div>
+          </div>
+          <div class="timer-display" id="pitchTimerDisplay">01:00</div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn-unlock" id="pitchTimerBtn" onclick="togglePitchTimer()">⏱️ Iniciar Práctica de 60s</button>
+            <button class="btn-secondary" onclick="resetPitchTimer()">↺ Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge c1">C1.1</span> Guion de Narración de Video Quirúrgico (Live Narration)</h2>
+          <button class="btn-audio" style="padding:7px 12px; font-size:0.8rem;" onclick="playFullLiveNarration(this)">
+            ▶ Escuchar Narración Continua (5 Etapas)
+          </button>
+        </div>
+        <ol>
+          <li>
+            <strong>Etapa 1 (Laparotomy &amp; Adhesiolysis):</strong> "We start with a midline laparotomy incision and carefully perform adhesiolysis to free the bowel loops from the hernia sac."
+            <button class="mini-play" onclick="speakText('We start with a midline laparotomy incision and carefully perform adhesiolysis to free the bowel loops from the hernia sac.', 0.95, this)">🔊</button>
+          </li>
+          <li>
+            <strong>Etapa 2 (Retrorectus Plane):</strong> "Here, the surgeon incises the posterior rectus sheath just lateral to the linea alba and develops the retrorectus plane toward the linea semilunaris."
+            <button class="mini-play" onclick="speakText('Here, the surgeon incises the posterior rectus sheath just lateral to the linea alba and develops the retrorectus plane toward the linea semilunaris.', 0.95, this)">🔊</button>
+          </li>
+          <li>
+            <strong>Etapa 3 (Nerve Preservation &amp; TAR):</strong> "Notice how they identify and preserve the neurovascular bundles, incise the posterior lamella of the internal oblique, and divide the transversus abdominis muscle fibers."
+            <button class="mini-play" onclick="speakText('Notice how they identify and preserve the neurovascular bundles, incise the posterior lamella of the internal oblique, and divide the transversus abdominis muscle fibers.', 0.95, this)">🔊</button>
+          </li>
+          <li>
+            <strong>Etapa 4 (Preperitoneal Dissection &amp; Posterior Closure):</strong> "This allows blunt dissection laterally into the preperitoneal space, completely off-loading tension. Next, they approximate and close the posterior layer in the midline."
+            <button class="mini-play" onclick="speakText('This allows blunt dissection laterally into the preperitoneal space, completely off-loading tension. Next, they approximate and close the posterior layer in the midline.', 0.95, this)">🔊</button>
+          </li>
+          <li>
+            <strong>Etapa 5 (Sublay Mesh &amp; Primary Closure):</strong> "A large synthetic mesh is placed in the retromuscular sublay plane, followed by a tension-free primary fascial closure of the anterior sheath."
+            <button class="mini-play" onclick="speakText('A large synthetic mesh is placed in the retromuscular sublay plane, followed by a tension-free primary fascial closure of the anterior sheath.', 0.95, this)">🔊</button>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         TAB 4: 5 CLASES ESTRUCTURADAS & VIDEOS VERIFICADOS
+         ========================================================= -->
+    <section id="tab-clases" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge a1">A1</span><span class="sec-badge b1">B1</span><span class="sec-badge c1">C1</span> Videos Quirúrgicos de Referencia (YouTube Verificados)</h2>
+        </div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-top:0;">
+          Reproduce los videos directamente en la plataforma o ábrelos en YouTube para tus ejercicios de <em>Live Narration</em> (narración en vivo sin sonido) y comprensión auditiva:
+        </p>
+        <div class="video-grid" id="videoGalleryContainer"></div>
+      </div>
+
+      <!-- CLASE 1 -->
+      <details class="lesson-box" open>
+        <summary>
+          <span><span class="sec-badge a1">A1.1</span><span class="sec-badge b1">B1.1</span> Clase 1: Inglés Quirúrgico Base, Fonética y Pared Abdominal (60 min)</span>
+          <button class="btn-secondary btn-complete-class" data-classnum="1" onclick="event.stopPropagation(); toggleClassComplete(1, this)">○ Marcar Clase Completada</button>
+        </summary>
+        <div class="lesson-content">
+          <ul>
+            <li><strong>Sección A1.1 — Min 0–10 (Warm-up &amp; Diagnostic):</strong> Corrección de los mensajes iniciales (<em>to do an observership, surgeon, abdominal wall, operating room</em>).</li>
+            <li><strong>Sección B1.1 — Min 10–22 (Fonética Grecolatina en Inglés):</strong> Repaso de acentuación latina en inglés con las primeras 12 flashcards (<em>peritoneum, linea semilunaris, transversalis fascia</em>).</li>
+            <li><strong>Sección C1.1 — Min 22–38 (Live Narration):</strong> Narración en vivo sin volumen de la animación 3D y un fragmento de 3 min de <em>Component Separation</em>.</li>
+            <li><strong>Sección B1.2 — Min 38–55 (Roleplay &amp; Pitch):</strong> Ingreso al OR con la <em>Circulating Nurse</em> + práctica cronometrada del <em>Elevator Pitch</em> de 60 segundos.</li>
+            <li><strong>Sección B1.3 — Min 55–60 (Tarea):</strong> Enviar audio de 60s por WhatsApp y preparar un caso clínico real.</li>
+          </ul>
+          <div class="dialogue-box" id="dialogue-class1"></div>
+        </div>
+      </details>
+
+      <!-- CLASE 2 -->
+      <details class="lesson-box">
+        <summary>
+          <span><span class="sec-badge b1">B1.2</span><span class="sec-badge c1">C1.2</span> Clase 2: Instrumental, Suturas y Ritmo del Quirófano (60 min)</span>
+          <button class="btn-secondary btn-complete-class" data-classnum="2" onclick="event.stopPropagation(); toggleClassComplete(2, this)">○ Marcar Clase Completada</button>
+        </summary>
+        <div class="lesson-content">
+          <ul>
+            <li><strong>Sección B1.1 — Min 0–10:</strong> Revisión y feedback fonético del audio del <em>Elevator Pitch</em>.</li>
+            <li><strong>Sección B1.2 — Min 10–25 (Instrumental EE. UU.):</strong> <em>Bovie</em> (electrobisturí), <em>DeBakey/Adson forceps</em>, <em>Kelly/Schnidt clamp</em>, <em>Army-Navy/Bookwalter retractor</em>, <em>Needle driver</em>, <em>Yankauer suction</em>, <em>JP drain</em>.</li>
+            <li><strong>Sección C1.1 — Min 25–40 (OR Soundscape):</strong> Órdenes rápidas intraoperatorias (<em>"Give me counter-traction laterally"</em>, <em>"Buzz that bleeder"</em>, <em>"Cut the tails short"</em>).</li>
+            <li><strong>Sección C1.2 — Min 40–55:</strong> Presentación de caso clínico real de Argentina en 3 minutos.</li>
+          </ul>
+          <div class="dialogue-box" id="dialogue-class2"></div>
+        </div>
+      </details>
+
+      <!-- CLASE 3 -->
+      <details class="lesson-box">
+        <summary>
+          <span><span class="sec-badge b1">B1.3</span><span class="sec-badge c1">C1.3</span> Clase 3: Pases de Sala, Tomografías y Planificación Pre-op (60 min)</span>
+          <button class="btn-secondary btn-complete-class" data-classnum="3" onclick="event.stopPropagation(); toggleClassComplete(3, this)">○ Marcar Clase Completada</button>
+        </summary>
+        <div class="lesson-content">
+          <ul>
+            <li><strong>Sección B1.1 — Min 0–10:</strong> Revisión de expresiones clave del video <em>What is a Rives-Stoppa Hernia Repair?</em>.</li>
+            <li><strong>Sección B1.2 — Min 10–25 (Optimización Preoperatoria):</strong> <em>Modifiable risk factors, smoking cessation, glycemic control (HbA1c), preoperative Botox, progressive pneumoperitoneum (PPP), rectus-to-defect ratio</em>.</li>
+            <li><strong>Sección C1.1 — Min 25–42 (CT Scan Walkthrough):</strong> Descripción estructurada de tomografía axial computada en voz alta.</li>
+            <li><strong>Sección C1.2 — Min 42–55 (Morning Rounds):</strong> Roleplay de pase de sala a las 6:30 AM defendiendo criterio quirúrgico.</li>
+          </ul>
+          <div class="dialogue-box" id="dialogue-class3"></div>
+        </div>
+      </details>
+
+      <!-- CLASE 4 -->
+      <details class="lesson-box">
+        <summary>
+          <span><span class="sec-badge b1">B1.4</span><span class="sec-badge c1">C1.4</span> Clase 4: Postoperatorio, Complicaciones y Manejo de Crisis (60 min)</span>
+          <button class="btn-secondary btn-complete-class" data-classnum="4" onclick="event.stopPropagation(); toggleClassComplete(4, this)">○ Marcar Clase Completada</button>
+        </summary>
+        <div class="lesson-content">
+          <ul>
+            <li><strong>Sección B1.1 — Min 0–10:</strong> Quick-fire clínico (perforación peritoneal / <em>buttonhole</em>, tensión excesiva en cierre anterior).</li>
+            <li><strong>Sección B1.2 — Min 10–25 (Vocabulario Post-op):</strong> <em>ERAS protocol, TAP block, length of stay (LOS), drain output, abdominal binder, SSO, SSI, seroma/hematoma, skin flap necrosis, bulging vs. true recurrence</em>.</li>
+            <li><strong>Sección C1.1 — Min 25–42:</strong> Comprensión auditiva de conferencia quirúrgica sin subtítulos.</li>
+            <li><strong>Sección C1.2 — Min 42–55:</strong> Debate clínico sobre manejo de malla infectada y fístulas enterocutáneas.</li>
+          </ul>
+          <div class="dialogue-box" id="dialogue-class4"></div>
+        </div>
+      </details>
+
+      <!-- CLASE 5 -->
+      <details class="lesson-box">
+        <summary>
+          <span><span class="sec-badge c1">C1.5</span> Clase 5: Simulacro Integral — Full Dress Rehearsal (60 min)</span>
+          <button class="btn-secondary btn-complete-class" data-classnum="5" onclick="event.stopPropagation(); toggleClassComplete(5, this)">○ Marcar Clase Completada</button>
+        </summary>
+        <div class="lesson-content">
+          <ul>
+            <li><strong>Sección B1.1 — Min 0–8 (Speed Pronunciation Drill):</strong> Repaso fonético relámpago de las 15 palabras más desafiantes:
+              <button class="mini-play" onclick="speakText('Surgeon. Observership. Abdominal wall. Peritoneum. Linea semilunaris. Arcuate line. Transversalis fascia. Neurovascular bundles. Adhesiolysis. Incarcerated. Strangulated. Retrorectus sublay plane. Primary fascial closure. Buttonhole. Bulging.', 0.92, this)">🔊 Escuchar las 15 Palabras Clave</button>
+            </li>
+            <li><strong>Sección C1.1 — Escena 1 (6:30 AM Morning Rounds):</strong> Llegada al hospital, presentación de corte axial de TC y cálculo de relación recto/defecto.</li>
+            <li><strong>Sección C1.2 — Escena 2 (OR Entry &amp; Pitch):</strong> Ingreso al quirófano, registro con la <em>Circulating Nurse</em> y <em>Elevator Pitch</em> de 60 segundos ante el equipo.</li>
+            <li><strong>Sección C1.3 — Escena 3 (Intraoperative TAR Narration):</strong> Narración en vivo de la incisión de la hoja posterior del oblicuo menor, sección del transverso y cierre del plano visceral posterior.</li>
+            <li><strong>Sección C1.4 — Escena 4 (Post-op Debrief &amp; Networking):</strong> Café post-cirugía discutiendo resultados a largo plazo, protocolo ERAS y futuras colaboraciones académicas.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- =========================================================
+         TAB 5: EJERCICIOS INTERACTIVOS & LABORATORIO DE CASOS
+         ========================================================= -->
+    <section id="tab-ejercicios" class="tab-panel">
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge a1">A1</span><span class="sec-badge b1">B1</span><span class="sec-badge c1">C1</span> Hoja de Ejercicios Interactiva (Interactive Worksheet)</h2>
+          <span class="score-pill" id="exerciseScorePill">Puntaje: — / 13</span>
+        </div>
+
+        <h3><span class="sec-badge a1">Sección A1.1</span> Parte A: Error Correction (Corrige los 2 errores en cada oración)</h3>
+        <div id="exPartAContainer"></div>
+
+        <h3><span class="sec-badge b1">Sección B1.1</span> Parte B: Match the Action (Asocia cada término quirúrgico con su definición)</h3>
+        <div id="exPartBContainer"></div>
+
+        <h3><span class="sec-badge c1">Sección C1.1</span> Parte C: Criterio Quirúrgico y Técnica TAR (Multiple Choice)</h3>
+        <div id="exPartCContainer"></div>
+
+        <div class="ex-actions">
+          <button class="btn-primary" onclick="checkAllExercises()">✓ Comprobar Respuestas (Check Answers)</button>
+          <button class="btn-secondary" onclick="fillShowAnswers()">👁️ Mostrar Soluciones (Show Key)</button>
+          <button class="btn-secondary" onclick="resetAllExercises()">↺ Reiniciar Ejercicios (Reset)</button>
+        </div>
+
+        <details class="lesson-box" style="margin-top:16px;">
+          <summary>🔑 Ver Clave de Respuestas Explicada (Teacher's Key)</summary>
+          <div class="lesson-content">
+            <p><strong>Parte A (Nivel A1):</strong><br/>
+              1. I am going <strong>to do an</strong> observership with a famous <strong>surgeon</strong> in New York. <button class="mini-play" onclick="speakText('I am going to do an observership with a famous surgeon in New York.', 0.95, this)">🔊</button><br/>
+              2. He is an expert <strong>on/in</strong> the abdominal <strong>wall</strong> and complex hernias. <button class="mini-play" onclick="speakText('He is an expert on the abdominal wall and complex hernias.', 0.95, this)">🔊</button><br/>
+              3. He described <strong>an</strong> important <strong>technique</strong> to repair ventral defects. <button class="mini-play" onclick="speakText('He described an important technique to repair ventral defects.', 0.95, this)">🔊</button><br/>
+              4. <strong>I'd like</strong> to learn <strong>operating</strong> room vocabulary before my trip. <button class="mini-play" onclick="speakText('I would like to learn operating room vocabulary before my trip.', 0.95, this)">🔊</button>
+            </p>
+            <p><strong>Parte B (Nivel B1):</strong> 1-c (<em>To scrub in</em>) | 2-e (<em>Circulating nurse</em>) | 3-b (<em>Bovie</em>) | 4-d (<em>Posterior rectus sheath</em>) | 5-a (<em>Sterile field</em>).</p>
+            <p><strong>Parte C (Nivel C1):</strong> 1: <em>The linea semilunaris and perforating neurovascular bundles</em> | 2: <em>The posterior lamella of the internal oblique aponeurosis</em> | 3: <em>Close the buttonhole immediately with absorbable suture</em> | 4: <em>Bulging is caused by denervation/muscle laxity with an intact fascial layer</em>.</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- Laboratorio de Redacción y Pronunciación de Caso Clínico -->
+      <div class="section-card">
+        <div class="section-header-row">
+          <h2><span class="sec-badge c1">Sección C1.2</span> Laboratorio de Presentación de Caso Clínico (con Lector US English)</h2>
+        </div>
+        <p style="font-size:0.88rem; color:var(--muted); margin-top:0;">
+          Redacta aquí tu propio caso clínico de reconstrucción de pared abdominal (o carga el caso modelo) y presiona <strong>"Escuchar mi caso en Inglés Americano"</strong> para practicar tu fluidez y entonación antes de presentarlo en el pase de sala:
+        </p>
+        <textarea
+          id="casePresentationPad"
+          class="sandbox-textarea"
+          placeholder="Escribe aquí tu caso clínico en inglés (ej. Patient is a 58-year-old female with a recurrent midline incisional hernia...)"
+        ></textarea>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:10px;">
+          <span id="caseWordCount" style="font-size:0.82rem; font-weight:700; color:var(--muted);">0 palabras</span>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-secondary" onclick="loadModelCaseDraft()">📄 Cargar Caso Clínico Modelo (C1)</button>
+            <button class="btn-audio" onclick="speakUserCaseDraft(this)">
+              <span class="wave"><span></span><span></span><span></span></span>
+              🔊 Escuchar Mi Caso en Inglés Americano
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
